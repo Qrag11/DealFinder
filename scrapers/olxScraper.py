@@ -75,7 +75,7 @@ class olxScraper(bazowyScraper):
                     elif url.startswith("/"):
                         url = "https://www.olx.pl" + url
 
-                    wyniki.append({
+                    self.zapisz_oferte({
                         "tytul": tytul,
                         "cena": cena,
                         "url": url,
