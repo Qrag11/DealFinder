@@ -10,7 +10,7 @@ async def main():
     scraper = olxScraper()
     oferty = await scraper.szukaj(adres)
     for o in oferty:
-        print(f"{o['tytul']} – {o['cena']} zł – {o['url']}")
+        print(f"{o['tytul']} – {o['cena']} zł – {o['url']} - {o['data_dodania']}")
 
 
 if __name__ == "__main__":
