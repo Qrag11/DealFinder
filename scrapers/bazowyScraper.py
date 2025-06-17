@@ -1,11 +1,17 @@
 from abc import ABC, abstractmethod
-from typing import List,Dict
+import asyncio
+import aiohttp
+import random
+from typing import List, Dict
 
-class BazowyScraper(ABC):
+
+class bazowyScraper(ABC):
     @abstractmethod
-    def szukaj(self, query: str, kategoria: str) -> List[Dict]:
-        """
-               Szuka ofert na stronie, zwraca listę słowników z kluczami:
-               'title', 'price', 'url', 'timestamp', 'site'
-               """
+    async def szukaj(self, adres: str) -> List[Dict]:
         pass
+
+    async def pobierz_strone(self, sesja: aiohttp.ClientSession, adres: str) -> str:
+        await asyncio.sleep(random.uniform(1, 2))
+        async with sesja.get(adres) as odpowiedz:
+            odpowiedz.raise_for_status()
+            return await odpowiedz.text()
