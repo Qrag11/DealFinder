@@ -6,3 +6,5 @@ matplotlib
 sqlalchemy
 aiohttp
 playwright
+PyQt5
+qasync

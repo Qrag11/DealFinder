@@ -1,17 +1,22 @@
-# main.py
 
+import qasync
 import asyncio
-
-from scrapers.olxScraper import olxScraper
+import sys
+from PyQt5.QtWidgets import QApplication
+from qasync import QEventLoop
+from app.dealFinderApp import dealFinderApp
 
 
 async def main():
-    adres = "https://www.olx.pl/elektronika/telefony/smartfony-telefony-komorkowe/q-iphone/q-{fraza}/"
-    scraper = olxScraper()
-    oferty = await scraper.szukaj(adres)
-    for o in oferty:
-        print(f"{o['tytul']} – {o['cena']} zł – {o['url']} - {o['data_dodania']}")
-
+    pass
 
 if __name__ == "__main__":
-    asyncio.run(main())
+    app = QApplication(sys.argv)
+    loop = QEventLoop(app)
+    asyncio.set_event_loop(loop)
+
+    window = dealFinderApp()
+    window.show()
+
+    with loop:
+        loop.run_forever()
