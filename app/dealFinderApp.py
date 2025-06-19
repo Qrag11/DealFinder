@@ -6,7 +6,7 @@ from contextlib import nullcontext
 import unicodedata
 from PyQt5.QtWidgets import (
     QApplication, QMainWindow, QLabel, QLineEdit, QPushButton,
-    QVBoxLayout, QWidget, QComboBox, QMessageBox
+    QVBoxLayout, QWidget, QComboBox, QMessageBox, QProgressDialog
 )
 from PyQt5.QtGui import QColor
 from PyQt5.QtCore import Qt
@@ -14,6 +14,7 @@ import sys
 import os
 
 from app.dealFinderService import dealFinderService
+from app.oknoAnalizy import oknoAnalizy
 from scrapers.olxScraper import olxScraper
 
 
@@ -60,57 +61,12 @@ class dealFinderApp(QMainWindow):
             self.btn_analiza.clicked.connect(self.analizuj_oferty)
             self.layout.addWidget(self.btn_analiza)
 
-            self.btn_pomoc = QPushButton("🤖 Pomoc w wyborze")
-            self.btn_pomoc.clicked.connect(self.pomoc_wyboru)
-            self.layout.addWidget(self.btn_pomoc)
+        self.zaladuj_styl()
 
-        self.stylizuj()
-
-    def stylizuj(self):
-        self.setStyleSheet("""
-            QWidget {
-                background-color: #2b2b2b;
-                color: #ffffff;
-                font-size: 14px;
-            }
-
-            QLineEdit, QComboBox {
-                padding: 6px;
-                border: 1px solid #555;
-                border-radius: 6px;
-                background-color: #3c3f41;
-            }
-
-            QPushButton {
-                padding: 10px;
-                border: 1px solid #888;
-                border-radius: 8px;
-                background-color: #5a5a5a;
-            }
-
-            QPushButton:hover {
-                background-color: #777;
-            }
-        """)
-
-
-
-    def szukaj_ofert(self):
-        fraza = self.fraza_input.text()
-        kategoria = self.kategoria_combo.currentText()
-
-        adres = self.dealFinderService.zbuduj_url(kategoria, fraza)
-
-        asyncio.create_task(self.dealFinderService.uruchom_scraper(adres))
-
-
-
-
-    def analizuj_oferty(self):
-        QMessageBox.information(self, "Analiza", "Tu będzie analiza ofert.")
-
-    def pomoc_wyboru(self):
-        QMessageBox.information(self, "Pomoc", "Tu będzie inteligentna pomoc w wyborze.")
+    def zaladuj_styl(self):
+        with open("app/styles.qss") as f:
+            styl = f.read()
+        self.setStyleSheet(styl)
 
     def on_kategoria_change(self, kategoria):
         podkategorie = self.kategorie.get(kategoria, {}).get("podkategorie", {})
@@ -119,5 +75,44 @@ class dealFinderApp(QMainWindow):
             self.podkategoria_combo.addItems(podkategorie.keys())
         else:
             self.podkategoria_combo.addItem("Brak podkategorii")
+
+
+    def szukaj_ofert(self):
+        fraza = self.fraza_input.text().strip()
+
+        kategoria = self.kategoria_combo.currentText()
+        #podkategoria = self.podkategoria_combo.currentText()
+        url = self.dealFinderService.zbuduj_url(kategoria, fraza) #, podkategoria)
+
+        progress = QProgressDialog("Trwa szukanie ofert...", None, 0, 0, self)
+        progress.setWindowModality(Qt.WindowModal)
+        progress.setCancelButton(None)  # wyłącz anulowanie
+        progress.setWindowTitle("Proszę czekać")
+        progress.show()
+
+        async def run_scraper():
+            try:
+                await self.dealFinderService.uruchom_scraper(url)
+            except Exception as e:
+                progress.close()
+                QMessageBox.warning(self, "Błąd", f"Błąd podczas pobierania ofert: {e}")
+                return
+            progress.close()
+            QMessageBox.information(self, "Sukces", "Oferty zostały pobrane.")
+
+        asyncio.create_task(run_scraper())
+
+    def analizuj_oferty(self):
+        self.hide()
+
+        fraza = self.fraza_input.text()
+        kategoria = self.kategoria_combo.currentText()
+        podkategoria = self.podkategoria_combo.currentText()
+
+        self.okno = oknoAnalizy(fraza, kategoria, podkategoria, parent=self)
+        self.okno.show()
+
+
+
 
 

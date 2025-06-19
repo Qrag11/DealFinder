@@ -8,3 +8,6 @@ aiohttp
 playwright
 PyQt5
 qasync
+plotly
+pandas
+PyQtWebEngine
