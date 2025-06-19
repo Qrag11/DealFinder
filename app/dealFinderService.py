@@ -21,8 +21,8 @@ class dealFinderService:
         text = re.sub(r'[^a-zA-Z0-9]+', '-', text)
         return text.strip('-').lower()
 
-    async def uruchom_scraper(self, url):
+    async def uruchom_scraper(self, url: str, kategoria: str, podkategoria: str =""):
         scraper = olxScraper()
-        oferty = await scraper.szukaj(url)
+        oferty = await scraper.szukaj(url, kategoria, podkategoria)
         return oferty
 

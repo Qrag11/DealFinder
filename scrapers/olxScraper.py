@@ -6,6 +6,8 @@ from bs4 import BeautifulSoup
 import re
 from typing import List, Dict
 import random
+
+from data.bazaOLX import zapisz_oferte
 from scrapers.bazowyScraper import bazowyScraper
 
 class olxScraper(bazowyScraper):
@@ -25,8 +27,7 @@ class olxScraper(bazowyScraper):
             return match.group(1).strip()
         return None
 
-    async def szukaj(self, adres: str) -> List[Dict]:
-
+    async def szukaj(self, adres: str, kategoria: str, podkategoria: str = "") -> List[Dict]:
 
         adresy = [
             adres,
@@ -75,13 +76,16 @@ class olxScraper(bazowyScraper):
                     elif url.startswith("/"):
                         url = "https://www.olx.pl" + url
 
-                    self.zapisz_oferte({
+                    zapisz_oferte({
                         "tytul": tytul,
                         "cena": cena,
                         "url": url,
                         "data_dodania": self.wyciagnij_date(data_dodania.get_text(strip=True)) ,
                         "serwis": "OLX",
-                        "zdjecie_url": zdjecie_url
+                        "zdjecie_url": zdjecie_url,
+                        "kategoria": kategoria,
+                        "podkategoria": podkategoria
+
                     })
 
         #########

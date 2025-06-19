@@ -92,7 +92,9 @@ class dealFinderApp(QMainWindow):
 
         async def run_scraper():
             try:
-                await self.dealFinderService.uruchom_scraper(url)
+                kategoria = self.kategoria_combo.currentText()
+                podkategoria = self.podkategoria_combo.currentText()
+                await self.dealFinderService.uruchom_scraper(url, kategoria, podkategoria)
             except Exception as e:
                 progress.close()
                 QMessageBox.warning(self, "Błąd", f"Błąd podczas pobierania ofert: {e}")
@@ -109,7 +111,7 @@ class dealFinderApp(QMainWindow):
         kategoria = self.kategoria_combo.currentText()
         podkategoria = self.podkategoria_combo.currentText()
 
-        self.okno = oknoAnalizy(fraza, kategoria, podkategoria, parent=self)
+        self.okno = oknoAnalizy(fraza, kategoria, podkategoria, rodzic=self)
         self.okno.show()
 
 
