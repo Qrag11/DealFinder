@@ -55,14 +55,15 @@ class olxScraper(bazowyScraper):
                     tytul_elem = oferta.select_one("h4")
                     cena_elem = oferta.select_one("p[data-testid=ad-price]") or oferta.select_one(".price")
                     link_elem = oferta.select_one("a[href]")
-                    zdjecie_elem = oferta.select_one("img")
                     data_dodania = oferta.select_one("p[data-testid=location-date]")
+                    zdjecie_elem = oferta.select_one("img")
                     if not all([tytul_elem, cena_elem, link_elem]):
                         continue
 
 
 
-                    zdjecie_url = zdjecie_elem.get("src") or zdjecie_elem.get("data-src") or ""
+
+
                     tytul = tytul_elem.get_text(strip=True)
                     cena_txt = cena_elem.get_text(strip=True).replace(" ", "").replace("zł", "").replace(",", "")
                     try:
@@ -75,6 +76,15 @@ class olxScraper(bazowyScraper):
                         url = "https:" + url
                     elif url.startswith("/"):
                         url = "https://www.olx.pl" + url
+
+                    zdjecie_url = None
+                    if zdjecie_elem and zdjecie_elem.has_attr("src"):
+                        zdjecie_url = zdjecie_elem["src"]
+                        # Czasem może być URL względny, więc upewnij się, że jest pełny
+                        if zdjecie_url.startswith("//"):
+                            zdjecie_url = "https:" + zdjecie_url
+                        elif zdjecie_url.startswith("/"):
+                            zdjecie_url = "https://www.olx.pl" + zdjecie_url
 
                     zapisz_oferte({
                         "tytul": tytul,

@@ -81,8 +81,8 @@ class dealFinderApp(QMainWindow):
         fraza = self.fraza_input.text().strip()
 
         kategoria = self.kategoria_combo.currentText()
-        #podkategoria = self.podkategoria_combo.currentText()
-        url = self.dealFinderService.zbuduj_url(kategoria, fraza) #, podkategoria)
+        podkategoria = self.podkategoria_combo.currentText()
+        url = self.dealFinderService.zbuduj_url(kategoria, fraza, podkategoria)
 
         progress = QProgressDialog("Trwa szukanie ofert...", None, 0, 0, self)
         progress.setWindowModality(Qt.WindowModal)

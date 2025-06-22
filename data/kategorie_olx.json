@@ -1,87 +1,316 @@
 {
   "Antyki i Kolekcje": {
     "url": "https://www.olx.pl/antyki-i-kolekcje/",
-    "podkategorie": {}
+    "podkategorie": {
+      "Antyki": "https://www.olx.pl/antyki-i-kolekcje/antyki/",
+      "Kolekcje": "https://www.olx.pl/antyki-i-kolekcje/kolekcje/",
+      "Sztuka": "https://www.olx.pl/antyki-i-kolekcje/sztuka/",
+      "Rękodzieło": "https://www.olx.pl/antyki-i-kolekcje/rekodzielo/"
+    }
   },
   "Firma i Przemysł": {
     "url": "https://www.olx.pl/dla-firm/",
-    "podkategorie": {}
+    "podkategorie": {
+      "Biuro": "https://www.olx.pl/dla-firm/biuro/",
+      "Części do maszyn i urządzeń": "https://www.olx.pl/dla-firm/czesci-do-maszyn-i-urzadzen/",
+      "Gastronomia": "https://www.olx.pl/dla-firm/gastronomia/",
+      "Kontenery": "https://www.olx.pl/dla-firm/kontenery/",
+      "Maszyny i urządzenia": "https://www.olx.pl/dla-firm/maszyny-i-urzadzenia/",
+      "Odzież robocza": "https://www.olx.pl/dla-firm/odziez-robocza/",
+      "Sklepy i magazyny": "https://www.olx.pl/dla-firm/sklepy-i-magazyny/",
+      "Sprzedam firmę": "https://www.olx.pl/dla-firm/sprzedam-firme/",
+      "Pozostałe": "https://www.olx.pl/dla-firm/pozostale/"
+    }
   },
   "Motoryzacja": {
     "url": "https://www.olx.pl/motoryzacja/",
-    "podkategorie": {}
+    "podkategorie": {
+      "Samochody osobowe": "https://www.olx.pl/motoryzacja/samochody/",
+      "Motocykle i Skutery": "https://www.olx.pl/motoryzacja/motocykle-skutery/",
+      "Dostawcze": "https://www.olx.pl/motoryzacja/dostawcze/",
+      "Ciężarowe": "https://www.olx.pl/motoryzacja/ciezarowe/",
+      "Budowlane": "https://www.olx.pl/motoryzacja/budowlane/",
+      "Przyczepy i Naczepy": "https://www.olx.pl/motoryzacja/przyczepy-i-naczepy/",
+      "Części samochodowe": "https://www.olx.pl/motoryzacja/czesci-samochodowe/",
+      "Części motocyklowe": "https://www.olx.pl/motoryzacja/czesci-motocyklowe/",
+      "Opony i Felgi": "https://www.olx.pl/motoryzacja/opony-felgi/",
+      "Sprzęt car audio": "https://www.olx.pl/motoryzacja/car-audio/",
+      "Pozostała motoryzacja": "https://www.olx.pl/motoryzacja/pozostala-motoryzacja/",
+      "Wyposażenie i akcesoria samochodowe": "https://www.olx.pl/motoryzacja/car-equipment-and-accessories/"
+    }
   },
   "Nieruchomości": {
     "url": "https://www.olx.pl/nieruchomosci/",
-    "podkategorie": {}
+    "podkategorie": {
+      "Mieszkania": "https://www.olx.pl/nieruchomosci/mieszkania/",
+      "Domy": "https://www.olx.pl/nieruchomosci/domy/",
+      "Działki": "https://www.olx.pl/nieruchomosci/dzialki/",
+      "Biura i Lokale": "https://www.olx.pl/nieruchomosci/biura-lokale/",
+      "Garaże i Parkingi": "https://www.olx.pl/nieruchomosci/garaze-parkingi/",
+      "Stancje i Pokoje": "https://www.olx.pl/nieruchomosci/stancje-pokoje/",
+      "Hale i Magazyny": "https://www.olx.pl/nieruchomosci/hale-magazyny/",
+      "Pozostałe nieruchomości": "https://www.olx.pl/nieruchomosci/pozostale-nieruchomosci/",
+      "Nieruchomości za granicą": "https://www.olx.pl/nieruchomosci/nieruchomosci-za-granica/"
+    }
   },
   "Praca": {
     "url": "https://www.olx.pl/praca/",
-    "podkategorie": {}
+    "podkategorie": {
+      "Administracja biurowa": "https://www.olx.pl/praca/administracja-biurowa/",
+      "Badania i rozwój": "https://www.olx.pl/praca/badania-rozwoj/",
+      "Bankowość": "https://www.olx.pl/praca/bankowosc/",
+      "BHP i ochrona środowiska": "https://www.olx.pl/praca/bhp-ochrona-srodowiska/",
+      "Budowa / remonty": "https://www.olx.pl/praca/budowa-remonty/",
+      "Dostawca, kurier miejski": "https://www.olx.pl/praca/dostawca-kurier-miejski/",
+      "E-commerce (handel internetowy)": "https://www.olx.pl/praca/e-commerce-handel-internetowy/",
+      "Edukacja": "https://www.olx.pl/praca/edukacja/",
+      "Energetyka": "https://www.olx.pl/praca/energetyka/",
+      "Finanse / księgowość": "https://www.olx.pl/praca/finanse-ksiegowosc/",
+      "Franczyza / Własna firma": "https://www.olx.pl/praca/franczyza-wlasna-firma/",
+      "Fryzjerstwo, kosmetyka": "https://www.olx.pl/praca/fryzjerstwo-kosmetyka/",
+      "Gastronomia": "https://www.olx.pl/praca/gastronomia/",
+      "HR": "https://www.olx.pl/praca/hr/",
+      "Hostessa, roznoszenie ulotek": "https://www.olx.pl/praca/hostessa-roznoszenie-ulotek/",
+      "Hotelarstwo": "https://www.olx.pl/praca/hotelarstwo/",
+      "Inżynieria": "https://www.olx.pl/praca/inzynieria/",
+      "IT / telekomunikacja": "https://www.olx.pl/praca/informatyka/",
+      "Kierowca": "https://www.olx.pl/praca/kierowca/",
+      "Logistyka, zakupy, spedycja": "https://www.olx.pl/praca/logistyka-zakupy-spedycja/",
+      "Marketing i PR": "https://www.olx.pl/praca/marketing-pr/",
+      "Mechanika i lakiernictwo": "https://www.olx.pl/praca/mechanika-lakiernictwo/",
+      "Montaż i serwis": "https://www.olx.pl/praca/montaz-serwis/",
+      "Obsługa klienta i call center": "https://www.olx.pl/praca/obsluga-klienta-call-center/",
+      "Ochrona": "https://www.olx.pl/praca/ochrona/",
+      "Opieka": "https://www.olx.pl/praca/opieka/",
+      "Organizacja i obsługa imprez": "https://www.olx.pl/praca/organizacja-obsluga-impres/",
+      "Praca za granicą": "https://www.olx.pl/praca/praca-za-granica/",
+      "Prace magazynowe": "https://www.olx.pl/praca/prace-magazynowe/",
+      "Pracownik sklepu": "https://www.olx.pl/praca/pracownik-sklepu/",
+      "Produkcja": "https://www.olx.pl/praca/produkcja/",
+      "Rolnictwo i ogrodnictwo": "https://www.olx.pl/praca/rolnictwo-i-ogrodnictwo/",
+      "Służby mundurowe": "https://www.olx.pl/praca/sluzby-mundurowe/",
+      "Sprzątanie": "https://www.olx.pl/praca/sprzatanie/",
+      "Sprzedaż": "https://www.olx.pl/praca/sprzedaz/",
+      "Ubezpieczenia": "https://www.olx.pl/praca/ubezpieczenia/",
+      "Wykładanie i ekspozycja towaru": "https://www.olx.pl/praca/wykladanie-ekspozycja-towaru/",
+      "Zdrowie": "https://www.olx.pl/praca/zdrowie/",
+      "Pozostałe oferty pracy": "https://www.olx.pl/praca/inne-oferty-pracy/",
+      "Praktyki / staże": "https://www.olx.pl/praca/praktyki-staze/",
+      "Kadra kierownicza": "https://www.olx.pl/praca/kadra-kierownicza/",
+      "Praca sezonowa": "https://www.olx.pl/praca/praca-sezonowa/",
+      "Zapraszamy seniorów": "https://www.olx.pl/praca/zapraszamy-seniorow/",
+      "Praca dodatkowa": "https://www.olx.pl/praca/praca-dodatkowa/"
+    }
   },
   "Dom i Ogród": {
     "url": "https://www.olx.pl/dom-ogrod/",
-    "podkategorie": {}
+    "podkategorie": {
+      "Budowa": "https://www.olx.pl/dom-ogrod/budowa/",
+      "Instalacje": "https://www.olx.pl/dom-ogrod/instalacje/",
+      "Meble": "https://www.olx.pl/dom-ogrod/meble/",
+      "Ogród": "https://www.olx.pl/dom-ogrod/ogrod/",
+      "Narzędzia": "https://www.olx.pl/dom-ogrod/narzedzia/",
+      "Ogrzewanie": "https://www.olx.pl/dom-ogrod/ogrzewanie/",
+      "Oświetlenie": "https://www.olx.pl/dom-ogrod/oswietlenie/",
+      "Supermarket": "https://www.olx.pl/dom-ogrod/supermarket/",
+      "Wykończenie wnętrz": "https://www.olx.pl/dom-ogrod/wykonczenie-wnetrz/",
+      "Wyposażenie wnętrz": "https://www.olx.pl/dom-ogrod/wyposazenie-wnetrz/",
+      "Pozostałe": "https://www.olx.pl/dom-ogrod/pozostale-dom-ogrod/"
+    }
   },
   "Elektronika": {
     "url": "https://www.olx.pl/elektronika/",
-    "podkategorie": {}
+    "podkategorie": {
+      "Fotografia": "https://www.olx.pl/elektronika/fotografia/",
+      "Gry i Konsole": "https://www.olx.pl/elektronika/gry-konsole/",
+      "Komputery": "https://www.olx.pl/elektronika/komputery/",
+      "Smartwatche i opaski": "https://www.olx.pl/elektronika/smartwatche-i-opaski/",
+      "Sprzęt AGD": "https://www.olx.pl/elektronika/sprzet-agd/",
+      "Sprzęt audio": "https://www.olx.pl/elektronika/sprzet-audio/",
+      "Sprzęt  video": "https://www.olx.pl/elektronika/sprzet-video/",
+      "Telefony": "https://www.olx.pl/elektronika/telefony/",
+      "TV": "https://www.olx.pl/elektronika/tv/",
+      "Pozostała elektronika": "https://www.olx.pl/elektronika/pozostala-elektronika/"
+    }
   },
   "Moda": {
     "url": "https://www.olx.pl/moda/",
-    "podkategorie": {}
+    "podkategorie": {
+      "Ubrania damskie": "https://www.olx.pl/moda/ubrania-damskie/",
+      "Ubrania męskie": "https://www.olx.pl/moda/ubrania-meskie/",
+      "Akcesoria": "https://www.olx.pl/moda/akcesoria/",
+      "Bielizna damska": "https://www.olx.pl/moda/bielizna-damska/",
+      "Bielizna męska": "https://www.olx.pl/moda/bielizna-meska/",
+      "Biżuteria": "https://www.olx.pl/moda/bizuteria/",
+      "Buty damskie": "https://www.olx.pl/moda/buty-damskie/",
+      "Buty męskie": "https://www.olx.pl/moda/buty-meskie/",
+      "Czapki i kapelusze": "https://www.olx.pl/moda/czapki-i-kapelusze/",
+      "Odzież ciążowa": "https://www.olx.pl/moda/odziez-ciazowa/",
+      "Do ślubu": "https://www.olx.pl/moda/do-slubu/",
+      "Torby i torebki": "https://www.olx.pl/moda/torby-i-torebki/",
+      "Zegarki": "https://www.olx.pl/moda/zegarki/",
+      "Pozostała moda": "https://www.olx.pl/moda/pozostala-moda/"
+    }
   },
   "Rolnictwo": {
     "url": "https://www.olx.pl/rolnictwo/",
-    "podkategorie": {}
+    "podkategorie": {
+      "Akcesoria": "https://www.olx.pl/rolnictwo/akcesoria/",
+      "Ciągniki": "https://www.olx.pl/rolnictwo/ciagniki/",
+      "Maszyny rolnicze": "https://www.olx.pl/rolnictwo/maszyny-rolnicze/",
+      "Przyczepy": "https://www.olx.pl/rolnictwo/przyczepy/",
+      "Części do maszyn rolniczych": "https://www.olx.pl/rolnictwo/czesci-do-maszyn-rolniczych/",
+      "Nawozy": "https://www.olx.pl/rolnictwo/nawozy/",
+      "Opony rolnicze": "https://www.olx.pl/rolnictwo/opony-rolnicze/",
+      "Produkty rolne": "https://www.olx.pl/rolnictwo/produkty-rolne/",
+      "Giełda zwierząt": "https://www.olx.pl/rolnictwo/gielda-zwierzat/",
+      "Ryneczek": "https://www.olx.pl/rolnictwo/ryneczek/",
+      "Środki ochrony roślin": "https://www.olx.pl/rolnictwo/srodki-ochrony-roslin/",
+      "Worki": "https://www.olx.pl/rolnictwo/worki/",
+      "Zbiorniki": "https://www.olx.pl/rolnictwo/zbiorniki/",
+      "Żywność i suplementacja zwierząt": "https://www.olx.pl/rolnictwo/zywnosc-i-suplementacja-zwierzat/",
+      "Pozostałe rolnicze": "https://www.olx.pl/rolnictwo/pozostale-rolnicze/"
+    }
   },
   "Zwierzęta": {
     "url": "https://www.olx.pl/zwierzeta/",
-    "podkategorie": {}
+    "podkategorie": {
+      "Akcesoria dla zwierząt": "https://www.olx.pl/zwierzeta/akcesoria-dla-zwierzat/",
+      "Karma i przysmaki": "https://www.olx.pl/zwierzeta/karma-i-przysmaki/",
+      "Akwarystyka": "https://www.olx.pl/zwierzeta/akwarystyka/",
+      "Psy": "https://www.olx.pl/zwierzeta/psy/",
+      "Koty": "https://www.olx.pl/zwierzeta/koty/",
+      "Ptaki": "https://www.olx.pl/zwierzeta/ptaki/",
+      "Gryzonie i Króliki": "https://www.olx.pl/zwierzeta/gryzonie/",
+      "Konie": "https://www.olx.pl/zwierzeta/konie/",
+      "Pozostałe zwierzęta": "https://www.olx.pl/zwierzeta/pozostale-zwierzeta/",
+      "Terrarystyka": "https://www.olx.pl/zwierzeta/terrarystyka/",
+      "Zaginione i znalezione": "https://www.olx.pl/zwierzeta/zaginione-i-znalezione/"
+    }
   },
   "Dla Dzieci": {
     "url": "https://www.olx.pl/dla-dzieci/",
-    "podkategorie": {}
+    "podkategorie": {
+      "Akcesoria dla niemowląt": "https://www.olx.pl/dla-dzieci/akcesoria-dla-niemowlat/",
+      "Artykuły szkolne": "https://www.olx.pl/dla-dzieci/artykuly-szkolne/",
+      "Buciki": "https://www.olx.pl/dla-dzieci/buciki/",
+      "Foteliki - Nosidełka": "https://www.olx.pl/dla-dzieci/foteliki-nosidelka/",
+      "Odzież niemowlęca": "https://www.olx.pl/dla-dzieci/odziez-niemowleca/",
+      "Ubranka dla chłopców": "https://www.olx.pl/dla-dzieci/ubranka-dla-chlopcow/",
+      "Ubranka dla dziewczynek": "https://www.olx.pl/dla-dzieci/ubranka-dla-dziewczynek/",
+      "Wózki dziecięce": "https://www.olx.pl/dla-dzieci/wozki-dzieciece/",
+      "Zabawki": "https://www.olx.pl/dla-dzieci/zabawki/",
+      "Pozostałe dla dzieci": "https://www.olx.pl/dla-dzieci/pozostale-dla-dzieci/"
+    }
   },
   "Sport i Hobby": {
     "url": "https://www.olx.pl/sport-hobby/",
-    "podkategorie": {}
+    "podkategorie": {
+      "Akcesoria jeździeckie": "https://www.olx.pl/sport-hobby/akcesoria-jezdzieckie/",
+      "Bilety": "https://www.olx.pl/sport-hobby/bilety/",
+      "Fitness": "https://www.olx.pl/sport-hobby/fitness/",
+      "Gry planszowe": "https://www.olx.pl/sport-hobby/gry-planszowe/",
+      "Militaria": "https://www.olx.pl/sport-hobby/militaria/",
+      "Pojazdy elektryczne": "https://www.olx.pl/sport-hobby/pojazdy-elektryczne/",
+      "Rowery": "https://www.olx.pl/sport-hobby/rowery/",
+      "Skating": "https://www.olx.pl/sport-hobby/skating/",
+      "Społeczność": "https://www.olx.pl/sport-hobby/spolecznosc/",
+      "Sporty drużynowe": "https://www.olx.pl/sport-hobby/sporty-druzynowe/",
+      "Sporty towarzyskie": "https://www.olx.pl/sport-hobby/sporty-towarzyskie/",
+      "Sporty wodne": "https://www.olx.pl/sport-hobby/sporty-wodne/",
+      "Sporty zimowe": "https://www.olx.pl/sport-hobby/sporty-zimowe/",
+      "Turystyka": "https://www.olx.pl/sport-hobby/turystyka/",
+      "Wędkarstwo": "https://www.olx.pl/sport-hobby/wedkarstwo/",
+      "Pozostały sport i hobby": "https://www.olx.pl/sport-hobby/pozostaly-sport-hobby/"
+    }
   },
   "Muzyka i Edukacja": {
     "url": "https://www.olx.pl/muzyka-edukacja/",
-    "podkategorie": {}
+    "podkategorie": {
+      "Książki": "https://www.olx.pl/muzyka-edukacja/ksiazki/",
+      "Muzyka": "https://www.olx.pl/muzyka-edukacja/muzyka/",
+      "Filmy": "https://www.olx.pl/muzyka-edukacja/filmy/",
+      "Instrumenty": "https://www.olx.pl/muzyka-edukacja/instrumenty/",
+      "Materiały językowe": "https://www.olx.pl/muzyka-edukacja/materialy-jezykowe/",
+      "Pozostała muzyka i edukacja": "https://www.olx.pl/muzyka-edukacja/pozostala-muzyka-edukacja/"
+    }
   },
   "Zdrowie i Uroda": {
     "url": "https://www.olx.pl/zdrowie-i-uroda/",
-    "podkategorie": {}
+    "podkategorie": {
+      "Ciało": "https://www.olx.pl/zdrowie-i-uroda/cialo/",
+      "Twarz": "https://www.olx.pl/zdrowie-i-uroda/twarz/",
+      "Paznokcie": "https://www.olx.pl/zdrowie-i-uroda/paznokcie/",
+      "Włosy": "https://www.olx.pl/zdrowie-i-uroda/wlosy/",
+      "Makijaż": "https://www.olx.pl/zdrowie-i-uroda/makijaz/",
+      "Perfumy": "https://www.olx.pl/zdrowie-i-uroda/perfumy/",
+      "Higiena jamy ustnej": "https://www.olx.pl/zdrowie-i-uroda/higiena-jamy-ustnej/",
+      "Korekcja wzroku": "https://www.olx.pl/zdrowie-i-uroda/korekcja-wzroku/",
+      "Produkty CBD": "https://www.olx.pl/zdrowie-i-uroda/produkty-cbd/",
+      "Sprzęt rehabilitacyjny i ortopedyczny": "https://www.olx.pl/zdrowie-i-uroda/sprzet-rehabilitacyjny-i-ortopedyczny/",
+      "Transport i poruszanie": "https://www.olx.pl/zdrowie-i-uroda/transport-i-poruszanie/",
+      "Urządzenia do masażu": "https://www.olx.pl/zdrowie-i-uroda/urzadzenia-do-masazu/",
+      "Urządzenia medyczne": "https://www.olx.pl/zdrowie-i-uroda/urzadzenia-medyczne/",
+      "Środki ochrony": "https://www.olx.pl/zdrowie-i-uroda/srodki-ochrony/",
+      "Witaminy i suplementy zdrowia": "https://www.olx.pl/zdrowie-i-uroda/witaminy-i-suplementy-zdrowia/",
+      "Pozostałe": "https://www.olx.pl/zdrowie-i-uroda/pozostale/"
+    }
   },
   "Usługi": {
     "url": "https://www.olx.pl/uslugi/",
-    "podkategorie": {}
+    "podkategorie": {
+      "Budowa i Remont": "https://www.olx.pl/uslugi/budowa-remont/",
+      "Obsługa imprez": "https://www.olx.pl/uslugi/obsluga-imprez/",
+      "Sprzątanie": "https://www.olx.pl/uslugi/sprzatanie/",
+      "Tłumaczenia": "https://www.olx.pl/uslugi/tlumaczenia/",
+      "Usługi finansowe": "https://www.olx.pl/uslugi/uslugi-finansowe/",
+      "Usługi informatyczne": "https://www.olx.pl/uslugi/uslugi-informatyczne/",
+      "Usługi motoryzacyjne": "https://www.olx.pl/uslugi/uslugi-motoryzacyjne/",
+      "Usługi ogrodnicze": "https://www.olx.pl/uslugi/uslugi-ogrodnicze/",
+      "Usługi reklamowe": "https://www.olx.pl/uslugi/uslugi-reklamowe/",
+      "Usługi transportowe": "https://www.olx.pl/uslugi/uslugi-transportowe/",
+      "Korepetycje": "https://www.olx.pl/uslugi/korepetycje/",
+      "Kursy i warsztaty": "https://www.olx.pl/uslugi/kursy-warsztaty/",
+      "Usługi dla zwierząt": "https://www.olx.pl/uslugi/uslugi-dla-zwierzat/",
+      "Współpraca biznesowa": "https://www.olx.pl/uslugi/wspolpraca-biznesowa/",
+      "Usługi ślubne": "https://www.olx.pl/uslugi/uslugi-slubne/",
+      "Uroda i zdrowie": "https://www.olx.pl/uslugi/uroda-zdrowie/",
+      "Usługi meblarskie": "https://www.olx.pl/uslugi/uslugi-meblarskie/",
+      "Serwis i naprawa RTV, AGD, Elektronika": "https://www.olx.pl/uslugi/serwis-agd-rtv/",
+      "Pozostałe usługi": "https://www.olx.pl/uslugi/pozostale-uslugi/"
+    }
   },
   "Noclegi": {
     "url": "https://www.olx.pl/noclegi/",
-    "podkategorie": {}
+    "podkategorie": {
+      "Noclegi za granicą": "https://www.olx.pl/noclegi/noclegi-za-granica/",
+      "Noclegi Polska": "https://www.olx.pl/noclegi/noclegi-polska/",
+      "Kwatery Pracownicze": "https://www.olx.pl/noclegi/kwatery-pracownicze/",
+      "Noclegi dla Ukrainy | Житло для українців": "https://www.olx.pl/noclegi/noclegi-dla-ukrainy/"
+    }
   },
   "Wypożyczalnia": {
     "url": "https://www.olx.pl/wypozyczalnia/",
-    "podkategorie": {}
+    "podkategorie": {
+      "Imprezy i wydarzenia": "https://www.olx.pl/wypozyczalnia/imprezy-i-wydarzenia/",
+      "Samochody i pojazdy": "https://www.olx.pl/wypozyczalnia/samochody-i-pojazdy/",
+      "Pozostałe Wypożyczalnia": "https://www.olx.pl/wypozyczalnia/wypozyczalnia-pozostale/",
+      "Sprzęt medyczny i rehabilitacyjny": "https://www.olx.pl/wypozyczalnia/sprzet-medyczny/",
+      "Urządzenia, maszyny i narzędzia": "https://www.olx.pl/wypozyczalnia/urzadzenia-narzedzia/",
+      "Jachty, łodzie i sporty wodne": "https://www.olx.pl/wypozyczalnia/czartery-jachty-i-lodzie/"
+    }
   },
   "Oddam za darmo": {
     "url": "https://www.olx.pl/oddam-za-darmo/",
     "podkategorie": {}
   },
-  "Baseny": {
-    "url": "https://www.olx.pl/dom-ogrod/ogrod/baseny/?utm_source=olx&utm_medium=promocategory&utm_campaign=baseny_2025",
-    "podkategorie": {}
-  },
-  "Supermarket z przesyłką od 1 zł": {
-    "url": "https://www.olx.pl/dom-ogrod/supermarket/?courier=1&utm_source=olx&utm_medium=promocategory&utm_campaign=supermarket_2025",
-    "podkategorie": {}
-  },
-  "Koty rasowe i do adopcji": {
-    "url": "https://www.olx.pl/zwierzeta/koty/?utm_source=olx&utm_medium=promocategory&utm_campaign=koty_kwiecien",
-    "podkategorie": {}
+  "Perfumy z przesyłką od 1 zł": {
+    "url": "https://www.olx.pl/zdrowie-i-uroda/perfumy/?courier=1&utm_source=olx&utm_medium=promocategory&utm_campaign=perfumy_dzienojca",
+    "podkategorie": {
+      "Dla kobiet": "https://www.olx.pl/zdrowie-i-uroda/perfumy/dla-kobiet/?courier=1",
+      "Dla mężczyzn": "https://www.olx.pl/zdrowie-i-uroda/perfumy/dla-mezczyzn/?courier=1",
+      "Uniseks": "https://www.olx.pl/zdrowie-i-uroda/perfumy/uniseks/?courier=1"
+    }
   },
   "Pracodawcy na OLX": {
     "url": "https://www.olx.pl/pracodawcy/",

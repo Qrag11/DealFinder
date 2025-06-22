@@ -8,7 +8,7 @@ class oknoAnalizyService:
     def wczytaj_dane(self) -> pd.DataFrame:
         polaczenie = sqlite3.connect("data/oferty.db")
         df = pd.read_sql_query("""
-            SELECT tytul, cena, url, data_dodania, kategoria, podkategoria
+            SELECT tytul, cena, url, data_dodania, kategoria, podkategoria, zdjecie_url
             FROM oferty
         """, polaczenie)
         polaczenie.close()
