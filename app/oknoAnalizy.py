@@ -1,10 +1,10 @@
 from PyQt5.QtWidgets import (
     QHBoxLayout, QMainWindow, QWidget, QVBoxLayout, QPushButton, QLabel,
-    QScrollArea, QSizePolicy
+    QScrollArea, QSizePolicy, QSpinBox
 )
 from PyQt5.QtCore import Qt
 from PyQt5.QtWebEngineWidgets import QWebEngineView
-from PyQt5.QtGui import QPixmap
+from PyQt5.QtGui import QDesktopServices
 import plotly.io as pio
 import tempfile
 from PyQt5.QtCore import QUrl
@@ -28,48 +28,70 @@ class oknoAnalizy(QMainWindow):
 
     def init_ui(self):
         centralny_widget = QWidget()
-        glowny_layout = QHBoxLayout(centralny_widget)  # Główny layout poziomy
+        glowny_layout = QHBoxLayout(centralny_widget)
         self.setCentralWidget(centralny_widget)
 
         dane = self.serwis.wczytaj_dane()
-        dane_filtrowane = self.serwis.filtruj_oferty(dane, self.fraza, self.kategoria, self.podkategoria)
-
-        if dane_filtrowane.empty:
-            glowny_layout.addWidget(QLabel("Brak ogłoszeń dla wybranych kryteriów."))
-            return
+        self.dane_filtrowane = self.serwis.filtruj_oferty(dane, self.fraza, self.kategoria, self.podkategoria)
 
         # LEWA STRONA: wykresy + przycisk w pionie
         lewa_strona = QWidget()
-        lewy_layout = QVBoxLayout(lewa_strona)
+        self.lewy_layout = QVBoxLayout(lewa_strona)
+
+        # Pola do filtrowania cen
+        self.min_cena = QSpinBox()
+        self.min_cena.setPrefix("Od: ")
+        self.min_cena.setMaximum(1_000_000)
+        self.min_cena.setValue(0)
+
+        self.max_cena = QSpinBox()
+        self.max_cena.setPrefix("Do: ")
+        self.max_cena.setMaximum(1_000_000)
+        self.max_cena.setValue(1_000_000)
+
+        self.przycisk_filtruj = QPushButton("Filtruj")
+        self.przycisk_filtruj.clicked.connect(self.odswiez_ogloszenia)
+
+        filtr_layout = QHBoxLayout()
+        filtr_layout.addWidget(self.min_cena)
+        filtr_layout.addWidget(self.max_cena)
+        filtr_layout.addWidget(self.przycisk_filtruj)
+        self.lewy_layout.addLayout(filtr_layout)
+
+        if self.dane_filtrowane.empty:
+            glowny_layout.addWidget(QLabel("Brak ogłoszeń dla wybranych kryteriów."))
+            return
+
+
 
         # Layout poziomy dla wykresów
         layout_wykresow = QHBoxLayout()
 
         wykres_histogram, statystyki = self.serwis.generuj_histogram(
-            dane_filtrowane,
+            self.dane_filtrowane,
             tytul=f"Rozkład cen: {self.fraza} / {self.kategoria} / {self.podkategoria}"
         )
         self._dodaj_wykres_do_layoutu(wykres_histogram, layout_wykresow)
 
         wykres_box = self.serwis.generuj_boxplot(
-            dane_filtrowane,
+            self.dane_filtrowane,
             tytul=f"Box‑plot: {self.fraza} / {self.kategoria} / {self.podkategoria}"
         )
         self._dodaj_wykres_do_layoutu(wykres_box, layout_wykresow)
 
-        lewy_layout.addLayout(layout_wykresow)
+        self.lewy_layout.addLayout(layout_wykresow)
 
         etykieta_stat = QLabel(
             f"Mediana: {statystyki['mediana']:.0f} zł   •   Q1: {statystyki['q1']:.0f} zł   •   Najlepsza cena ≈ {statystyki['najlepsza']:.0f} zł"
         )
         etykieta_stat.setAlignment(Qt.AlignCenter)
-        lewy_layout.addWidget(etykieta_stat)
+        self.lewy_layout.addWidget(etykieta_stat)
 
         self.przycisk_powrotu = QPushButton("🔙 Powrót")
         self.przycisk_powrotu.clicked.connect(self.close)
-        lewy_layout.addWidget(self.przycisk_powrotu)
+        self.lewy_layout.addWidget(self.przycisk_powrotu)
 
-        glowny_layout.addWidget(lewa_strona, 3)  # 3/4 szerokości okna
+        glowny_layout.addWidget(lewa_strona, 3)
 
         # PRAWA STRONA: przewijalna lista ogłoszeń
         prawa_strona = QWidget()
@@ -78,23 +100,13 @@ class oknoAnalizy(QMainWindow):
         scroll = QScrollArea()
         scroll.setWidgetResizable(True)
         prawa_lista_widget = QWidget()
-        prawa_lista_layout = QVBoxLayout(prawa_lista_widget)
+        self.prawa_lista_layout = QVBoxLayout(prawa_lista_widget)
 
-        # Dodaj ogłoszenia - zdjęcie + tytuł + cena
-        for idx, wiersz in dane_filtrowane.iterrows():
-            ogloszenie = QWidget()
-            ogloszenie_layout = QHBoxLayout(ogloszenie)
+
+        self.odswiez_ogloszenia()
 
 
 
-            # Info tekstowe - tytuł i cena
-            info = QLabel(f"<b>{wiersz['tytul']}</b><br>Cena: {wiersz['cena']} zł")
-            info.setWordWrap(True)
-            ogloszenie_layout.addWidget(info)
-
-            prawa_lista_layout.addWidget(ogloszenie)
-
-        prawa_lista_layout.addStretch()
         scroll.setWidget(prawa_lista_widget)
         prawa_layout.addWidget(scroll)
 
@@ -113,3 +125,33 @@ class oknoAnalizy(QMainWindow):
         podglad = QWebEngineView()
         podglad.load(QUrl.fromLocalFile(tmp.name))
         layout.addWidget(podglad)
+
+    def odswiez_ogloszenia(self):
+        for i in reversed(range(self.prawa_lista_layout.count())):
+            widget = self.prawa_lista_layout.itemAt(i).widget()
+            if widget:
+                widget.setParent(None)
+
+        min_c = self.min_cena.value()
+        max_c = self.max_cena.value()
+
+        dane_zakres = self.dane_filtrowane[
+            (self.dane_filtrowane['cena'] >= min_c) & (self.dane_filtrowane['cena'] <= max_c)
+            ]
+
+        if dane_zakres.empty:
+            self.prawa_lista_layout.addWidget(QLabel("Brak ogłoszeń w tym zakresie cenowym."))
+        else:
+            for _, wiersz in dane_zakres.iterrows():
+                ogloszenie = QWidget()
+                layout = QHBoxLayout(ogloszenie)
+
+                przycisk = QPushButton(f"{wiersz['tytul']}\nCena: {wiersz['cena']} zł")
+                przycisk.setStyleSheet("text-align: left;")
+                przycisk.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Preferred)
+                przycisk.clicked.connect(lambda _, url=wiersz['url']: QDesktopServices.openUrl(QUrl(url)))
+
+                layout.addWidget(przycisk)
+                self.prawa_lista_layout.addWidget(ogloszenie)
+
+
