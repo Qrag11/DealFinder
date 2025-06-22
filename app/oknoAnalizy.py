@@ -85,20 +85,7 @@ class oknoAnalizy(QMainWindow):
             ogloszenie = QWidget()
             ogloszenie_layout = QHBoxLayout(ogloszenie)
 
-            # Ładuj zdjęcie z URL
-            obrazek = QLabel()
-            obrazek.setFixedSize(120, 90)  # ustalony rozmiar miniatury
 
-            try:
-                response = requests.get(wiersz['zdjecie_url'])
-                pixmap = QPixmap()
-                pixmap.loadFromData(response.content)
-                pixmap = pixmap.scaled(120, 90, Qt.KeepAspectRatio, Qt.SmoothTransformation)
-                obrazek.setPixmap(pixmap)
-            except Exception:
-                obrazek.setText("Brak zdjęcia")
-
-            ogloszenie_layout.addWidget(obrazek)
 
             # Info tekstowe - tytuł i cena
             info = QLabel(f"<b>{wiersz['tytul']}</b><br>Cena: {wiersz['cena']} zł")
