@@ -86,7 +86,7 @@ class dealFinderApp(QMainWindow):
 
         progress = QProgressDialog("Trwa szukanie ofert...", None, 0, 0, self)
         progress.setWindowModality(Qt.WindowModal)
-        progress.setCancelButton(None)  # wyłącz anulowanie
+        progress.setCancelButton(None)
         progress.setWindowTitle("Proszę czekać")
         progress.show()
 

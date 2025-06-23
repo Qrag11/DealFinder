@@ -1,0 +1,26 @@
+{
+  "Osobowe": {
+    "url": "https://www.otomoto.pl/osobowe"
+  },
+  "Ciezarowe": {
+    "url": "https://www.otomoto.pl/ciezarowe"
+  },
+  "Budowlane": {
+    "url": "https://www.otomoto.pl/maszyny-budowlane/sprzedaz"
+  },
+  "Dostawcze": {
+    "url": "https://www.otomoto.pl/dostawcze"
+  },
+  "Motocykle": {
+    "url": "https://www.otomoto.pl/motocykle-i-quady"
+  },
+  "Przyczepy": {
+    "url": "https://www.otomoto.pl/przyczepy"
+  },
+  "Rolnicze": {
+    "url": "https://www.otomoto.pl/maszyny-rolnicze"
+  },
+  "Czesci": {
+    "url": "https://www.otomoto.pl/czesci"
+  }
+}
