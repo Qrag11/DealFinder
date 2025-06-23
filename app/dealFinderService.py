@@ -2,6 +2,7 @@ import re
 
 import unicodedata
 from scrapers.olxScraper import olxScraper
+from scrapers.otomotoScraper import otomotoScraper
 from PyQt5.QtWidgets import QMessageBox
 
 
@@ -33,8 +34,43 @@ class dealFinderService:
 
             return url
 
+
         elif zrodlo == "Otomoto":
 
+            baza_kat = self.rodzic.kategorie if self.rodzic else {}
+
+            url = ""
+
+            if kategoria in baza_kat:
+
+                kat_info = baza_kat[kategoria]
+                if isinstance(kat_info, dict) and "url" in kat_info:
+
+                    url = kat_info["url"]
+
+                    if podkategoria and podkategoria != "Brak podkategorii":
+
+                        podkategorie = kat_info.get("podkategorie", {})
+
+                        if podkategoria in podkategorie:
+                            url = podkategorie[podkategoria]
+
+                else:
+
+                    url = f"https://www.otomoto.pl/{self.formatuj_kategorie(kategoria)}/"
+
+            else:
+
+                url = f"https://www.otomoto.pl/{self.formatuj_kategorie(kategoria)}/"
+
+            if fraza:
+
+                if not url.endswith('/'):
+                    url += '/'
+
+                url += f"q-{fraza}/"
+
+            return url
 
             return None
 
@@ -47,9 +83,7 @@ class dealFinderService:
         if zrodlo == "OLX":
             scraper = olxScraper()
         elif zrodlo == "Otomoto":
-            #from scrapers.otomotoScraper import otomotoScraper
-            #scraper = otomotoScraper()
-            print("Otomoto")
+            scraper = otomotoScraper()
         else:
             scraper = olxScraper()
 

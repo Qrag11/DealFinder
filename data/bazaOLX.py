@@ -9,7 +9,6 @@ def utworz_baze():
                     tytul TEXT,
                     cena INTEGER,
                     url TEXT UNIQUE,
-                    data_dodania TEXT,
                     serwis TEXT,
                     kategoria TEXT,
                     podkategoria TEXT
@@ -24,18 +23,16 @@ def zapisz_oferte(oferta: dict):
     cursor = conn.cursor()
     try:
         cursor.execute("""
-            INSERT OR IGNORE INTO oferty (tytul, cena, url, data_dodania, serwis, kategoria, podkategoria)
-            VALUES (?, ?, ?, ?, ?, ?, ?)
+            INSERT OR IGNORE INTO oferty (tytul, cena, url, serwis, kategoria, podkategoria)
+            VALUES (?, ?, ?, ?, ?, ?)
             ON CONFLICT(url) DO UPDATE SET
                 cena=excluded.cena,
-                data_dodania=excluded.data_dodania,
                 kategoria=excluded.kategoria,
                 podkategoria=excluded.podkategoria
         """, (
             oferta["tytul"],
             oferta["cena"],
             oferta["url"],
-            oferta["data_dodania"],
             oferta["serwis"],
             oferta.get("kategoria", None),
             oferta.get("podkategoria", None)
