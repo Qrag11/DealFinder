@@ -1,0 +1,50 @@
+[
+  {
+    "kategoria": "osobowe",
+    "podkategoria": "Samochody osobowe"
+  },
+  {
+    "kategoria": "dostawcze",
+    "podkategoria": "Samochody dostawcze"
+  },
+  {
+    "kategoria": "motocykle",
+    "podkategoria": "Motocykle i skutery"
+  },
+  {
+    "kategoria": "ciężarowe",
+    "podkategoria": "Samochody ciężarowe"
+  },
+  {
+    "kategoria": "przyczepy-naczepy",
+    "podkategoria": "Przyczepy, naczepy"
+  },
+  {
+    "kategoria": "autobusy",
+    "podkategoria": "Autobusy"
+  },
+  {
+    "kategoria": "maszyny-budowlane",
+    "podkategoria": "Maszyny budowlane"
+  },
+  {
+    "kategoria": "maszyny-rolnicze",
+    "podkategoria": "Maszyny rolnicze"
+  },
+  {
+    "kategoria": "maszyny-lesne",
+    "podkategoria": "Maszyny leśne"
+  },
+  {
+    "kategoria": "maszyny-komunalne",
+    "podkategoria": "Maszyny komunalne"
+  },
+  {
+    "kategoria": "czesci",
+    "podkategoria": "Części i akcesoria"
+  },
+  {
+    "kategoria": "inne-pojazdy",
+    "podkategoria": "Inne pojazdy i maszyny"
+  }
+]
