@@ -25,7 +25,7 @@ class olxScraper(bazowyScraper):
         soup = BeautifulSoup("".join(strony_html), "lxml")
         oferty = soup.select("div[data-cy=l-card]")
 
-        print(f"DEBUG: Łącznie znaleziono {len(oferty)} ofert")
+
 
         for oferta in oferty:
             tytul_elem = oferta.select_one("h4")

@@ -12,10 +12,9 @@ import os
 
 from app.dealFinderService import dealFinderService
 from app.oknoAnalizy import oknoAnalizy
-import sqlite3
-import matplotlib.pyplot as plt
 
 
+from app.oknoPorownania import oknoPorownania
 
 class dealFinderApp(QMainWindow):
     def __init__(self):
@@ -154,112 +153,15 @@ class dealFinderApp(QMainWindow):
     def on_zrodlo_change(self, zrodlo):
         self.load_kategorie(zrodlo)
 
-
-
     def porownaj_oferty(self):
-
-        fraza = self.fraza_input.text().strip()
-
-        with open("data/kat_olx_otomoto.json", encoding="utf-8") as f:
-            dopasowania = json.load(f)
         serwis = self.zrodlo_combo.currentText()
+        fraza = self.fraza_input.text().strip()
         kategoria = self.kategoria_combo.currentText()
         podkategoria = self.podkategoria_combo.currentText()
 
-        if(serwis == "Otomoto"):
-            znalezione = None
-            kategoria_lower = kategoria.strip().lower()
-            for dop in dopasowania:
-                if dop["kategoria"].strip().lower() == kategoria_lower:
-                    znalezione = dop
-                    break
+        self.okno_porownania = oknoPorownania(serwis, fraza, kategoria, podkategoria, rodzic=self)
+        self.okno_porownania.show()
 
-            if not znalezione:
-                QMessageBox.warning(self, "Brak dopasowania",
-                                    f"Nie znaleziono dopasowania dla kategorii: '{kategoria}'.")
-                return
-
-            podkategoria = znalezione["podkategoria"]
-        else:
-            znalezione = None
-            for dop in dopasowania:
-                if dop["podkategoria"] == podkategoria:
-                    znalezione = dop
-                    break
-
-            if not znalezione:
-                QMessageBox.warning(self, "Brak dopasowania",
-                                    f"Nie znaleziono dopasowania dla podkategorii: '{podkategoria}'.")
-                return
-
-            kategoria = znalezione["kategoria"]
-
-
-
-        conn = sqlite3.connect("data/oferty.db")
-        cursor = conn.cursor()
-
-        # Przygotuj wzorzec LIKE dla frazy (dodaj % na początku i końcu, jeśli fraza nie jest pusta)
-        like_pattern = f"%{fraza}%" if fraza else "%"
-
-        print(f"Serwis: {serwis}")
-        print(f"Kategoria: {kategoria}")
-        print(f"Podkategoria: {podkategoria}")
-        print(f"Fraza LIKE: {like_pattern}")
-
-        # Pobieramy ceny z Otomoto z filtrem po frazie w tytule
-        if serwis == "Otomoto":
-            cursor.execute("""
-                SELECT cena FROM oferty
-                WHERE serwis='Otomoto' AND kategoria=? AND tytul LIKE ?
-                AND cena IS NOT NULL
-            """, (kategoria, like_pattern))
-            ceny_baza = [row[0] for row in cursor.fetchall()]
-
-            cursor.execute("""
-                SELECT cena FROM oferty
-                WHERE serwis='OLX' AND podkategoria=? AND tytul LIKE ?
-                AND cena IS NOT NULL
-            """, (podkategoria, like_pattern))
-            ceny_porownanie = [row[0] for row in cursor.fetchall()]
-
-            nazwy = ['Otomoto', 'OLX']
-
-        else:  # serwis == "OLX"
-            cursor.execute("""
-                SELECT cena FROM oferty
-                WHERE serwis='OLX' AND podkategoria=? AND tytul LIKE ?
-                AND cena IS NOT NULL
-            """, (podkategoria, like_pattern))
-            ceny_baza = [row[0] for row in cursor.fetchall()]
-
-            cursor.execute("""
-                SELECT cena FROM oferty
-                WHERE serwis='Otomoto' AND LOWER(kategoria)=LOWER(?)
-                AND tytul LIKE ?
-                AND cena IS NOT NULL
-            """, (kategoria, like_pattern))
-            ceny_porownanie = [row[0] for row in cursor.fetchall()]
-
-            nazwy = ['OLX', 'Otomoto']
-
-        conn.close()
-
-        if not ceny_baza or not ceny_porownanie:
-            QMessageBox.warning(self, "Brak danych",
-                                "Brak ofert do porównania dla wybranej kategorii/frazy.")
-            return
-
-        srednia_baza = sum(ceny_baza) / len(ceny_baza)
-        srednia_porownanie = sum(ceny_porownanie) / len(ceny_porownanie)
-
-        fig, ax = plt.subplots()
-        srednie_ceny = [srednia_baza, srednia_porownanie]
-
-        ax.bar(nazwy, srednie_ceny, color=['blue', 'orange'])
-        ax.set_title(f'Porównanie średnich cen: {kategoria} / {podkategoria}\nFraza: "{fraza}"')
-        ax.set_ylabel('Średnia cena [PLN]')
-        plt.show()
 
 
 

@@ -8,7 +8,7 @@ class oknoAnalizyService:
     def wczytaj_dane(self) -> pd.DataFrame:
         polaczenie = sqlite3.connect("data/oferty.db")
         df = pd.read_sql_query("""
-            SELECT tytul, cena, url, data_dodania, kategoria, podkategoria
+            SELECT tytul, cena, url, kategoria, podkategoria
             FROM oferty
         """, polaczenie)
         polaczenie.close()
@@ -33,17 +33,17 @@ class oknoAnalizyService:
     def generuj_histogram(self, df, tytul="Rozkład cen"):
         ceny = df['cena']
 
-        # Oblicz wartości statystyczne
+
         q1 = np.percentile(ceny, 25)
         q3 = np.percentile(ceny, 75)
         mediana = np.median(ceny)
         najlepsza = ceny.min()
 
-        # Przycięcie danych do 95 percentyla
+
         gorna_granica = np.percentile(ceny, 95)
         ceny_przyciecie = ceny[ceny <= gorna_granica]
 
-        # Histogram tylko z przyciętymi wartościami
+
         wykres = px.histogram(ceny_przyciecie, nbins=30, title=tytul, labels={"value": "Cena (zł)"})
         wykres.update_layout(bargap=0.1)
 

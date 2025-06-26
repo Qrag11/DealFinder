@@ -8,8 +8,7 @@ from PyQt5.QtGui import QDesktopServices
 import plotly.io as pio
 import tempfile
 from PyQt5.QtCore import QUrl
-import requests
-from io import BytesIO
+
 
 from app.oknoAnalizyService import oknoAnalizyService
 
@@ -34,11 +33,11 @@ class oknoAnalizy(QMainWindow):
         dane = self.serwis.wczytaj_dane()
         self.dane_filtrowane = self.serwis.filtruj_oferty(dane, self.fraza, self.kategoria, self.podkategoria)
 
-        # LEWA STRONA: wykresy + przycisk w pionie
+
         lewa_strona = QWidget()
         self.lewy_layout = QVBoxLayout(lewa_strona)
 
-        # Pola do filtrowania cen
+
         self.min_cena = QSpinBox()
         self.min_cena.setPrefix("Od: ")
         self.min_cena.setMaximum(1_000_000)
@@ -64,7 +63,7 @@ class oknoAnalizy(QMainWindow):
 
 
 
-        # Layout poziomy dla wykresów
+
         layout_wykresow = QHBoxLayout()
 
         wykres_histogram, statystyki = self.serwis.generuj_histogram(
@@ -93,7 +92,7 @@ class oknoAnalizy(QMainWindow):
 
         glowny_layout.addWidget(lewa_strona, 3)
 
-        # PRAWA STRONA: przewijalna lista ogłoszeń
+
         prawa_strona = QWidget()
         prawa_layout = QVBoxLayout(prawa_strona)
 
@@ -110,7 +109,7 @@ class oknoAnalizy(QMainWindow):
         scroll.setWidget(prawa_lista_widget)
         prawa_layout.addWidget(scroll)
 
-        glowny_layout.addWidget(prawa_strona, 2)  # 2/5 szerokości okna (proporcja)
+        glowny_layout.addWidget(prawa_strona, 2)
 
     def closeEvent(self, zdarzenie):
         if self.parent():

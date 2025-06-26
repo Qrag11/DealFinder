@@ -3,7 +3,7 @@ import re
 import unicodedata
 from scrapers.olxScraper import olxScraper
 from scrapers.otomotoScraper import otomotoScraper
-from PyQt5.QtWidgets import QMessageBox
+
 
 
 class dealFinderService:

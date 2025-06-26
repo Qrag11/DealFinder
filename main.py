@@ -1,5 +1,3 @@
-
-import qasync
 import asyncio
 import sys
 from PyQt5.QtWidgets import QApplication

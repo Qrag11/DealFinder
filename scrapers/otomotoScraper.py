@@ -5,7 +5,7 @@ from bs4 import BeautifulSoup
 from typing import List, Dict
 import re
 
-from data.bazaOLX import zapisz_oferte  # Możesz mieć osobną bazę lub ten sam zapis
+from data.bazaOLX import zapisz_oferte
 from scrapers.bazowyScraper import bazowyScraper
 
 
@@ -20,11 +20,9 @@ class otomotoScraper(bazowyScraper):
                 *(self.pobierz_strone(sesja, adr) for adr in adresy)
             )
 
-        # Łączymy wszystkie strony w jeden soup – szybciej, jeden parsing
+
         soup = BeautifulSoup("".join(strony_html), "lxml")
         oferty = soup.select("article[data-id]")
-
-        print(f"DEBUG: Łącznie znaleziono {len(oferty)} ofert")
 
         for oferta in oferty:
             tytul_elem = oferta.select_one("h2")
