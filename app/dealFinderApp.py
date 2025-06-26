@@ -20,7 +20,7 @@ class dealFinderApp(QMainWindow):
     def __init__(self):
         super().__init__()
         self.dealFinderService = dealFinderService(self)
-        self.setWindowTitle("OLX Deal Finder")
+        self.setWindowTitle("Deal Finder")
         self.setGeometry(100, 100, 400, 300)
 
         self.central_widget = QWidget()
