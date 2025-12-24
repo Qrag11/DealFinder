@@ -5,7 +5,7 @@ from bs4 import BeautifulSoup
 from typing import List, Dict
 import re
 
-from app.data.bazaOLX import zapisz_oferte
+from app.data.baza import zapisz_oferte
 from app.scrapers import BazowyScraper
 
 

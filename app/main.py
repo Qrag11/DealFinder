@@ -3,7 +3,7 @@ import sys
 from PyQt5.QtWidgets import QApplication
 from qasync import QEventLoop
 from app.gui import DealFinderApp
-from app.data.bazaOLX import utworz_baze
+from app.data.baza import utworz_baze
 
 
 async def main():
