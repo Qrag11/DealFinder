@@ -6,7 +6,7 @@ import random
 from typing import List, Dict
 
 
-class bazowyScraper(ABC):
+class BazowyScraper(ABC):
     @abstractmethod
     async def szukaj(self, adres: str) -> List[Dict]:
         pass

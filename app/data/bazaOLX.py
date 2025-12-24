@@ -1,7 +1,7 @@
 import sqlite3
 
 def utworz_baze():
-    conn = sqlite3.connect("data/oferty.db")
+    conn = sqlite3.connect("app/data/oferty.db")
     cursor = conn.cursor()
     cursor.execute("""
                 CREATE TABLE IF NOT EXISTS oferty (
@@ -19,7 +19,7 @@ def utworz_baze():
 
 
 def zapisz_oferte(oferta: dict):
-    conn = sqlite3.connect("data/oferty.db")
+    conn = sqlite3.connect("app/data/oferty.db")
     cursor = conn.cursor()
     try:
         cursor.execute("""

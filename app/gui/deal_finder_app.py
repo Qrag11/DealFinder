@@ -1,5 +1,7 @@
 import json
 import asyncio
+from app.config import KATEGORIE_OLX
+from app.config import STYLES_DIR
 
 from PyQt5.QtWidgets import (
     QApplication, QMainWindow, QLabel, QLineEdit, QPushButton,
@@ -10,16 +12,19 @@ from PyQt5.QtCore import Qt
 
 import os
 
-from app.dealFinderService import dealFinderService
-from app.oknoAnalizy import oknoAnalizy
+from app.services.deal_finder_service import DealFinderService
+from .okno_analizy import OknoAnalizy
+from .okno_porownania import OknoPorownania
 
 
-from app.oknoPorownania import oknoPorownania
+from .okno_analizy import OknoAnalizy
+from .okno_porownania import OknoPorownania
+from app.config import DB_PATH
 
-class dealFinderApp(QMainWindow):
+class DealFinderApp(QMainWindow):
     def __init__(self):
         super().__init__()
-        self.dealFinderService = dealFinderService(self)
+        self.DealFinderService = DealFinderService(self)
         self.setWindowTitle("Deal Finder")
         self.setGeometry(100, 100, 400, 300)
 
@@ -33,7 +38,7 @@ class dealFinderApp(QMainWindow):
         self.layout.addWidget(self.label_fraza)
         self.layout.addWidget(self.fraza_input)
 
-        with open("data/kategorie_olx.json", encoding="utf-8") as f:
+        with open(KATEGORIE_OLX, encoding="utf-8") as f:
             self.kategorie = json.load(f)
 
         self.label_zrodlo = QLabel("Wybierz źródło ofert:")
@@ -66,7 +71,7 @@ class dealFinderApp(QMainWindow):
         self.btn_szukaj.clicked.connect(self.szukaj_ofert)
         self.layout.addWidget(self.btn_szukaj)
 
-        if os.path.exists("data/oferty.db"):
+        if os.path.exists(DB_PATH):
             self.btn_analiza = QPushButton("📊 Analizuj oferty")
             self.btn_analiza.clicked.connect(self.analizuj_oferty)
             self.layout.addWidget(self.btn_analiza)
@@ -78,7 +83,7 @@ class dealFinderApp(QMainWindow):
         self.zaladuj_styl()
 
     def zaladuj_styl(self):
-        with open("app/styles.qss") as f:
+        with open(STYLES_DIR/"styles.qss") as f:
             styl = f.read()
         self.setStyleSheet(styl)
 
@@ -96,7 +101,7 @@ class dealFinderApp(QMainWindow):
         podkategoria = self.podkategoria_combo.currentText()
         zrodlo = self.zrodlo_combo.currentText()
 
-        url = self.dealFinderService.zbuduj_url(kategoria, fraza, podkategoria, zrodlo)
+        url = self.DealFinderService.zbuduj_url(kategoria, fraza, podkategoria, zrodlo)
 
         progress = QProgressDialog("Trwa szukanie ofert...", None, 0, 0, self)
         progress.setWindowModality(Qt.WindowModal)
@@ -106,7 +111,7 @@ class dealFinderApp(QMainWindow):
 
         async def run_scraper():
             try:
-                await self.dealFinderService.uruchom_scraper(url, kategoria, podkategoria, zrodlo)
+                await self.DealFinderService.uruchom_scraper(url, kategoria, podkategoria, zrodlo)
             except Exception as e:
                 progress.close()
                 QMessageBox.warning(self, "Błąd", f"Błąd podczas pobierania ofert: {e}")
@@ -123,16 +128,16 @@ class dealFinderApp(QMainWindow):
         kategoria = self.kategoria_combo.currentText()
         podkategoria = self.podkategoria_combo.currentText()
 
-        self.okno = oknoAnalizy(fraza, kategoria, podkategoria, rodzic=self)
+        self.okno = OknoAnalizy(fraza, kategoria, podkategoria, rodzic=self)
         self.okno.show()
 
     def load_kategorie(self, zrodlo):
         if zrodlo == "OLX":
-            sciezka = "data/kategorie_olx.json"
+            sciezka = "app/data/kategorie_olx.json"
         elif zrodlo == "Otomoto":
-            sciezka = "data/kategorie_otomoto.json"
+            sciezka = "app/data/kategorie_otomoto.json"
         else:
-            sciezka = "data/kategorie_olx.json"
+            sciezka = "app/data/kategorie_olx.json"
 
         try:
             with open(sciezka, encoding="utf-8") as f:
@@ -159,7 +164,7 @@ class dealFinderApp(QMainWindow):
         kategoria = self.kategoria_combo.currentText()
         podkategoria = self.podkategoria_combo.currentText()
 
-        self.okno_porownania = oknoPorownania(serwis, fraza, kategoria, podkategoria, rodzic=self)
+        self.okno_porownania = OknoPorownania(serwis, fraza, kategoria, podkategoria, rodzic=self)
         self.okno_porownania.show()
 
 

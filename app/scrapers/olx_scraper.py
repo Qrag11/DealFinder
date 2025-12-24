@@ -7,10 +7,10 @@ import re
 from typing import List, Dict
 import random
 
-from data.bazaOLX import zapisz_oferte
-from scrapers.bazowyScraper import bazowyScraper
+from app.data.bazaOLX import zapisz_oferte
+from app.scrapers import BazowyScraper
 
-class olxScraper(bazowyScraper):
+class OlxScraper(BazowyScraper):
     locale.setlocale(locale.LC_TIME, 'Polish_Poland')
 
     async def szukaj(self, adres: str, kategoria: str, podkategoria: str = ""):

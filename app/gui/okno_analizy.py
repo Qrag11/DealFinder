@@ -3,24 +3,23 @@ from PyQt5.QtWidgets import (
     QScrollArea, QSizePolicy, QSpinBox
 )
 from PyQt5.QtCore import Qt
-from PyQt5.QtWebEngineWidgets import QWebEngineView
 from PyQt5.QtGui import QDesktopServices
-import plotly.io as pio
-import tempfile
 from PyQt5.QtCore import QUrl
 
+from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
+import matplotlib.pyplot as plt
 
-from app.oknoAnalizyService import oknoAnalizyService
+from app.services.okno_analizy_service import OknoAnalizyService
 
 
-class oknoAnalizy(QMainWindow):
+class OknoAnalizy(QMainWindow):
     def __init__(self, fraza, kategoria, podkategoria, rodzic=None):
         super().__init__(rodzic)
         self.fraza = fraza
         self.kategoria = kategoria
         self.podkategoria = podkategoria
 
-        self.serwis = oknoAnalizyService()
+        self.serwis = OknoAnalizyService()
 
         self.setWindowTitle("Analiza ofert")
         self.init_ui()
@@ -33,11 +32,10 @@ class oknoAnalizy(QMainWindow):
         dane = self.serwis.wczytaj_dane()
         self.dane_filtrowane = self.serwis.filtruj_oferty(dane, self.fraza, self.kategoria, self.podkategoria)
 
-
         lewa_strona = QWidget()
         self.lewy_layout = QVBoxLayout(lewa_strona)
 
-
+        # Filtry cenowe
         self.min_cena = QSpinBox()
         self.min_cena.setPrefix("Od: ")
         self.min_cena.setMaximum(1_000_000)
@@ -61,9 +59,7 @@ class oknoAnalizy(QMainWindow):
             glowny_layout.addWidget(QLabel("Brak ogłoszeń dla wybranych kryteriów."))
             return
 
-
-
-
+        # Wykresy
         layout_wykresow = QHBoxLayout()
 
         wykres_histogram, statystyki = self.serwis.generuj_histogram(
@@ -92,7 +88,7 @@ class oknoAnalizy(QMainWindow):
 
         glowny_layout.addWidget(lewa_strona, 3)
 
-
+        # Lista ogłoszeń
         prawa_strona = QWidget()
         prawa_layout = QVBoxLayout(prawa_strona)
 
@@ -101,10 +97,7 @@ class oknoAnalizy(QMainWindow):
         prawa_lista_widget = QWidget()
         self.prawa_lista_layout = QVBoxLayout(prawa_lista_widget)
 
-
         self.odswiez_ogloszenia()
-
-
 
         scroll.setWidget(prawa_lista_widget)
         prawa_layout.addWidget(scroll)
@@ -116,14 +109,10 @@ class oknoAnalizy(QMainWindow):
             self.parent().show()
         super().closeEvent(zdarzenie)
 
-    def _dodaj_wykres_do_layoutu(self, wykres, layout):
-        html = pio.to_html(wykres, full_html=False)
-        tmp = tempfile.NamedTemporaryFile(delete=False, suffix=".html")
-        tmp.write(html.encode('utf-8'))
-        tmp.flush()
-        podglad = QWebEngineView()
-        podglad.load(QUrl.fromLocalFile(tmp.name))
-        layout.addWidget(podglad)
+    def _dodaj_wykres_do_layoutu(self, figura_matplotlib, layout):
+        """Dodaje matplotlib Figure do layoutu PyQt"""
+        canvas = FigureCanvas(figura_matplotlib)
+        layout.addWidget(canvas)
 
     def odswiez_ogloszenia(self):
         for i in reversed(range(self.prawa_lista_layout.count())):
@@ -136,7 +125,7 @@ class oknoAnalizy(QMainWindow):
 
         dane_zakres = self.dane_filtrowane[
             (self.dane_filtrowane['cena'] >= min_c) & (self.dane_filtrowane['cena'] <= max_c)
-            ]
+        ]
 
         if dane_zakres.empty:
             self.prawa_lista_layout.addWidget(QLabel("Brak ogłoszeń w tym zakresie cenowym."))
@@ -152,5 +141,3 @@ class oknoAnalizy(QMainWindow):
 
                 layout.addWidget(przycisk)
                 self.prawa_lista_layout.addWidget(ogloszenie)
-
-

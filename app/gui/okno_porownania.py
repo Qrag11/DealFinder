@@ -1,10 +1,10 @@
 from PyQt5.QtWidgets import QMainWindow, QVBoxLayout, QWidget, QPushButton
 import matplotlib.pyplot as plt
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
-from app.oknoPorownaniaService import oknoPorownaniaService
+from app.services.okno_porownania_service import OknoPorownaniaService
 
 
-class oknoPorownania(QMainWindow):
+class OknoPorownania(QMainWindow):
     def __init__(self, serwis, fraza, kategoria, podkategoria, rodzic=None):
         super().__init__(rodzic)
         self.serwis = serwis
@@ -14,7 +14,7 @@ class oknoPorownania(QMainWindow):
         self.rodzic = rodzic
 
         self.setWindowTitle("Okno Porównania Ofert")
-        self.serwis_obj = oknoPorownaniaService()
+        self.serwis_obj = OknoPorownaniaService()
 
         self.init_ui()
         self.wykonaj_porownanie()

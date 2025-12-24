@@ -1,12 +1,12 @@
 import re
 
 import unicodedata
-from scrapers.olxScraper import olxScraper
-from scrapers.otomotoScraper import otomotoScraper
+from app.scrapers import OlxScraper
+from app.scrapers import OtomotoScraper
 
 
 
-class dealFinderService:
+class DealFinderService:
     def __init__(self, rodzic=None):
         self.rodzic = rodzic
 
@@ -81,11 +81,11 @@ class dealFinderService:
 
     async def uruchom_scraper(self, url: str, kategoria: str, podkategoria: str = "", zrodlo="OLX"):
         if zrodlo == "OLX":
-            scraper = olxScraper()
+            scraper = OlxScraper()
         elif zrodlo == "Otomoto":
-            scraper = otomotoScraper()
+            scraper = OtomotoScraper()
         else:
-            scraper = olxScraper()
+            scraper = OlxScraper()
 
         oferty = await scraper.szukaj(url, kategoria, podkategoria)
         return oferty

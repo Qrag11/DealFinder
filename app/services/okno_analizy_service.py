@@ -1,12 +1,14 @@
 import sqlite3
 import pandas as pd
-import plotly.express as px
 import numpy as np
+import matplotlib.pyplot as plt
 
-class oknoAnalizyService:
+from app.config import DB_PATH
+
+class OknoAnalizyService:
 
     def wczytaj_dane(self) -> pd.DataFrame:
-        polaczenie = sqlite3.connect("data/oferty.db")
+        polaczenie = sqlite3.connect(DB_PATH)
         df = pd.read_sql_query("""
             SELECT tytul, cena, url, kategoria, podkategoria
             FROM oferty
@@ -33,28 +35,32 @@ class oknoAnalizyService:
     def generuj_histogram(self, df, tytul="Rozkład cen"):
         ceny = df['cena']
 
-
-        q1 = np.percentile(ceny, 25)
-        q3 = np.percentile(ceny, 75)
-        mediana = np.median(ceny)
-        najlepsza = ceny.min()
-
-
+        # przycięcie na 95 percentyl
         gorna_granica = np.percentile(ceny, 95)
         ceny_przyciecie = ceny[ceny <= gorna_granica]
 
+        fig, ax = plt.subplots()
+        ax.hist(ceny_przyciecie, bins=30, color='skyblue', edgecolor='black')
+        ax.set_title(tytul)
+        ax.set_xlabel("Cena (zł)")
+        ax.set_ylabel("Liczba ogłoszeń")
 
-        wykres = px.histogram(ceny_przyciecie, nbins=30, title=tytul, labels={"value": "Cena (zł)"})
-        wykres.update_layout(bargap=0.1)
-
-        statystyki = {"mediana": mediana, "q1": q1, "najlepsza": najlepsza}
-        return wykres, statystyki
+        statystyki = {
+            "mediana": np.median(ceny),
+            "q1": np.percentile(ceny, 25),
+            "najlepsza": ceny.min()
+        }
+        return fig, statystyki
 
     def generuj_boxplot(self, df, tytul="Box‑plot cen"):
         ceny = df['cena']
 
+        # przycięcie na 95 percentyl
         gorna_granica = np.percentile(ceny, 95)
         ceny_przyciecie = ceny[ceny <= gorna_granica]
 
-        wykres = px.box(ceny_przyciecie, title=tytul, labels={"value": "Cena (zł)"})
-        return wykres
+        fig, ax = plt.subplots()
+        ax.boxplot(ceny_przyciecie, vert=True)
+        ax.set_title(tytul)
+        ax.set_ylabel("Cena (zł)")
+        return fig

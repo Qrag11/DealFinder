@@ -5,11 +5,11 @@ from bs4 import BeautifulSoup
 from typing import List, Dict
 import re
 
-from data.bazaOLX import zapisz_oferte
-from scrapers.bazowyScraper import bazowyScraper
+from app.data.bazaOLX import zapisz_oferte
+from app.scrapers import BazowyScraper
 
 
-class otomotoScraper(bazowyScraper):
+class OtomotoScraper(BazowyScraper):
     async def szukaj(self, adres: str, kategoria: str, podkategoria: str = ""):
         adresy = [adres] + [f"{adres}?page={nr}" for nr in range(2, 4)]
 

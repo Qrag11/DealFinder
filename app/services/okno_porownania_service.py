@@ -2,12 +2,12 @@ import json
 import sqlite3
 import matplotlib.pyplot as plt
 from PyQt5.QtWidgets import QMessageBox
+from app.config import DB_PATH, DOPASOWANIA_OLX_OTOMOTO
 
-
-class oknoPorownaniaService:
+class OknoPorownaniaService:
     def __init__(self):
-        self.db_path = "data/oferty.db"
-        self.dopasowania_path = "data/kat_olx_otomoto.json"
+        self.db_path = DB_PATH
+        self.dopasowania_path = DOPASOWANIA_OLX_OTOMOTO
 
     def porownaj_oferty(self, serwis, fraza, kategoria, podkategoria, rodzic=None):
         with open(self.dopasowania_path, encoding="utf-8") as f:
